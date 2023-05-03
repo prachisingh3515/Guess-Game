@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Number Guessing Game</title>
+    <meta charset="UTF-8">
+    <style>
+        body{
+			color: white;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+        h1{
+			margin-top: 12%;
+			font-family:'Times New Roman', Times, serif;
+			text-shadow: 3px 3px 2px rgb(204, 234, 35);
+			font-size: 60px;
+		}
+        h2{
+			color: white;
+            font-size: 30px;
+            font-family: cursive;
+		}
+        .img{
+			font-size: 30px;
+			font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			color: chartreuse;
+		}
+        .green{
+			background: pink;
+		}
+        button{
+            cursor: pointer;
+            padding: 20px;
+			width: 100px;
+            border-color:rgb(255, 0, 170);
+            border-radius: 20px;  
+        }
+        .output{
+			font-family: cursive;
+			color:orangered;
+			font-size: 150%;
+			border-style: groove;
+		}
+    </style>
+  </head>
+  <body background="https://tse1.mm.bing.net/th?id=OIP.d-3eQ_pqvZUvQtwEnwQd8gHaEo&pid=Api&rs=1&c=1&qlt=95&w=196&h=122">
+    <center><h1>GUESS THE NUMBER</h1></center>
+    <h2><center>Give me a number!!</center></h2>
+	<h2><center>Let's see If I can guess it right or not</center></h2>
+    <center><p class="img">Enter a number between 1 and 100 <img src="https://tse4.mm.bing.net/th?id=OIP.p6O4f7duMatzPymJnzM3mQHaHk&pid=Api&P=0" height="30px" width="30px"></p></center><br>
+    <center><input type="number" id="userInput" class="green"></center><br>
+    <center><button onclick="startGame()">Start Game</button></center>
+    <center><p id="result" class="output"></p></center>
+    <script>
+        let ans;
+        let attemptsLeft = 5;
+
+function startGame() {
+  
+  const userInput = document.getElementById("userInput").value;
+
+  
+  if (userInput < 1 || userInput > 100) {
+    document.getElementById("result").innerHTML = "Enter a number between 1 and 100.";
+    return;
+  }
+
+  
+  ans = userInput;
+
+  
+  attemptsLeft = 5;
+
+  
+  guessNum();
+}
+
+function guessNum() {
+  
+  const guess = Math.floor(Math.random() * 100) + 1;
+
+  
+  attemptsLeft--;
+
+  
+  document.getElementById("result").innerHTML += `Attempt ${5-attemptsLeft}: Computer guessed ${guess}.<br>`;
+
+ 
+  if (guess == ans) {
+    document.getElementById("result").innerHTML += "Computer guessed the number correctly. Computer wins!";
+    return;
+  }
+
+  
+  if (attemptsLeft <= 0) {
+    document.getElementById("result").innerHTML += `Computer ran out of attempts. User wins! The answer was ${ans}.`;
+    return;
+  }
+
+  
+  setTimeout(guessNum, 1000);
+}
+    </script>
+  </body>
+</html>
